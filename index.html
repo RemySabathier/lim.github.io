@@ -62,7 +62,7 @@
         <p>
         Reconstructing dynamic assets from video data is central to many in computer vision and graphics tasks.
         Existing 4D reconstruction approaches are limited by category-specific models or slow optimization-based methods.
-        Inspired by the recent Large Reconstruction Model (LRM), we present the <b>Large Interpolation Model</b> (LIM), a transformer-based feed-forward solution, guided by a novel causal consistency loss, for interpolating implicit 3D representations across time.
+        Inspired by the recent Large Reconstruction Model (LRM), we present the <b>Large Interpolation Model</b> (<span class="lim">LIM</span>), a transformer-based feed-forward solution, guided by a novel causal consistency loss, for interpolating implicit 3D representations across time.
         Given implicit 3D representations at times \( t_{0} \) and \( t_{1} \), LIM produces a deformed shape at any continuous time \( t \in [t_{0},t_{1}] \)  delivering high-quality interpolations in seconds (per frame).
         Furthermore, LIM allows explicit mesh tracking across time, producing a consistently uv-textured mesh sequence ready for integration into existing production pipelines.
         We also use LIM, in conjunction with a diffusion-based multiview generator, to produce dynamic 4D reconstructions from monocular videos.
@@ -73,7 +73,7 @@
     </p>
         </div>
           <img src="static/images/architecture.png" height="10%">
-          <figcaption>Figure1: <b>LIM Architecture</b>. TODO</figcaption>
+          <figcaption>Figure1: <b><span class="lim">LIM</span> Architecture</b>. TODO</figcaption>
             <br>
           </div>
     </div>
@@ -85,18 +85,27 @@
 
 <!-- Interpolation -->
 <section class="section">  
-    <div class="container is-max-desktop">
-      <div class="container is-centered has-text-centered">
-        <h2 class="title is-3">RGB Interpolation</h2>
-        <div class="content is-centered has-text-centered has-text-justified">
-          <p>
-            TODO.
-          </p>
-        </div>
+  <div class="container is-max-desktop">
+    <div class="container is-centered has-text-centered">
+      <h2 class="title is-3">Frame Interpolation</h2>
+      <div class="content is-centered has-text-centered has-text-justified">
+        <p>
+          Our first model, <span class="lim">LIM</span> directly interpolates color & opacity-field in 3D space.
+          It dramatically reduces artifact compared to image-based interpolation.
+        </p>
       </div>
+      <!-- Add the video here -->
+      <div class="video-container">
+        <video autoplay loop muted class="is-centered">
+          <source src="static/images/qualitative_interpolation.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
+      <figcaption>Figure2: <b>Frame Interpolation</b>. TODO</figcaption>
     </div>
-  </section>
+    </div>
+  </div>
+</section>
   <!-- Interpolation -->
 
 
@@ -119,7 +128,7 @@
             Your browser does not support the video tag.
           </video>
         </div>
-        <figcaption>Figure2: <b>Monocular Reconstruction</b>. TODO</figcaption>
+        <figcaption>Figure3: <b>Monocular Reconstruction</b>. TODO</figcaption>
       </div>
       </div>
     </div>
