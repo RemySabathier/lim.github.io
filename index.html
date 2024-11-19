@@ -75,7 +75,6 @@
           <img src="static/images/architecture.png" height="10%">
           <figcaption>Figure1: <b>LIM Architecture</b>. TODO</figcaption>
             <br>
-
           </div>
     </div>
   </div>
@@ -105,12 +104,22 @@
 <section class="section">  
     <div class="container is-max-desktop">
       <div class="container is-centered has-text-centered">
-        <h2 class="title is-3">4D Reconstruction</h2>
+        <h2 class="title is-3">Monocular Reconstruction</h2>
         <div class="content is-centered has-text-centered has-text-justified">
           <p>
-            TODO.
+            We observe that results from off-the-shelf 3D reconstructor jitters (since the frames are reconstructed independently).
+            Consistent4D are consistent in time, but the method is slow.
+            Our method combined with a monocular-to-multiview video diffusion model is significantly faster and time-consistent.
           </p>
         </div>
+        <!-- Add the video here -->
+        <div class="video-container">
+          <video autoplay loop muted class="is-centered">
+            <source src="static/images/qualitative_monocular.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <figcaption>Figure2: <b>Monocular Reconstruction</b>. TODO</figcaption>
       </div>
       </div>
     </div>
@@ -136,11 +145,30 @@
   <!-- Mesh Tracking -->
 
 
+  <!-- Related work -->
+  <section class="section" id="Related work">
+    <div class="container is-max-desktop content">
+      <h2 class="title">Related Work</h2>
+      <ul>
+        <li>
+          Yanqin Jiang, Li Zhang, Jin Gao, Weimin Hu, Yao Yao (2023). 
+          <b>Consistent4D</b>: Consistent 360deg Dynamic Object Generation from Monocular Video. 
+          <a href="https://arxiv.org/abs/2311.02848"> (link)</a>
+        </li>
+        <li>
+          Dmitry Tochilkin, David Pankratz, Zexiang Liu, Zixuan Huang, Adam Letts, Yangguang Li, Ding Liang, Christian Laforte, Varun Jampani, Yan-Pei Cao (2024). 
+          <b>TripoSR</b>: Fast 3D Object Reconstruction from a Single Image. 
+          <a href="https://arxiv.org/abs/2403.02151"> (link)</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <!-- Related work -->
+  
+  <footer>
+    Template inspired by <a href="https://github.com/nerfies/nerfies.github.io">Nerfies.</a>
+  </footer>
 
-
-<footer>
-  Template inspired by <a href="https://github.com/nerfies/nerfies.github.io">Nerfies.</a>
-</footer>
 
 </body>
 </html>
