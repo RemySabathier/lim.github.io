@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
-    <!-- Load Latex -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!-- Load Latex -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <meta charset="utf-8">
   <meta name="description"
@@ -12,7 +11,6 @@
   <meta name="keywords" content="LIM">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LIM: Large Interpolator Model for Dynamic Reconstruction</title>
-
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -32,9 +30,8 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
+
 <body>
-
-
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
@@ -50,9 +47,7 @@
   </section>
 
 
-
-
-<!-- Abstract. -->
+  <!-- Abstract. -->
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -82,7 +77,6 @@
 <!--/ Abstract. -->
 
 
-
 <!-- Interpolation -->
 <section class="section">  
   <div class="container is-max-desktop">
@@ -102,39 +96,11 @@
         </video>
       </div>
       <figcaption>Figure2: <b>Frame Interpolation</b>. TODO</figcaption>
-    </div>
+      <!-- End video -->
     </div>
   </div>
 </section>
   <!-- Interpolation -->
-
-
-<!-- 4D Reconstruction -->
-<section class="section">  
-    <div class="container is-max-desktop">
-      <div class="container is-centered has-text-centered">
-        <h2 class="title is-3">Monocular Reconstruction</h2>
-        <div class="content is-centered has-text-centered has-text-justified">
-          <p>
-            We observe that results from off-the-shelf 3D reconstructor jitters (since the frames are reconstructed independently).
-            Consistent4D are consistent in time, but the method is slow.
-            Our method combined with a monocular-to-multiview video diffusion model is significantly faster and time-consistent.
-          </p>
-        </div>
-        <!-- Add the video here -->
-        <div class="video-container">
-          <video autoplay loop muted class="is-centered">
-            <source src="static/images/qualitative_monocular.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <figcaption>Figure3: <b>Monocular Reconstruction</b>. TODO</figcaption>
-      </div>
-      </div>
-    </div>
-  </section>
-  <!-- 4D Reconstruction -->
-
 
 
   <!-- Mesh Tracking -->
@@ -144,14 +110,51 @@
         <h2 class="title is-3">Mesh Tracking</h2>
         <div class="content is-centered has-text-centered has-text-justified">
           <p>
-            TODO.
+            An extension of our model, <span class="limxyz">LIM</span>, can propagate the <b>XYZ coordinates</b> on the first timestep to the other steps.
+            This is the cornerstone of the mesh tracking method, which will leverage these matches.
           </p>
         </div>
+      <!-- Add the video here -->
+      <div class="video-container">
+        <video autoplay loop muted class="is-centered">
+          <source src="static/images/qualitative_xyz.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <figcaption>Figure3: <b>Tracking</b>. TODO</figcaption>
+      <!-- End video -->
       </div>
       </div>
     </div>
   </section>
   <!-- Mesh Tracking -->
+
+
+<!-- 4D Reconstruction -->
+<section class="section">  
+  <div class="container is-max-desktop">
+    <div class="container is-centered has-text-centered">
+      <h2 class="title is-3">Application: Monocular Reconstruction</h2>
+      <div class="content is-centered has-text-centered has-text-justified">
+        <p>
+          We observe that results from off-the-shelf 3D reconstructor jitters (since the frames are reconstructed independently).
+          Consistent4D are consistent in time, but the method is slow.
+          Our method combined with a monocular-to-multiview video diffusion model is significantly faster and time-consistent.
+        </p>
+      </div>
+      <!-- Add the video here -->
+      <div class="video-container">
+        <video autoplay loop muted class="is-centered">
+          <source src="static/images/qualitative_monocular.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <figcaption>Figure3: <b>Monocular Reconstruction</b>. TODO</figcaption>
+      <!-- End video -->
+    </div>
+  </div>
+</section>
+<!-- 4D Reconstruction -->
 
 
   <!-- Related work -->
