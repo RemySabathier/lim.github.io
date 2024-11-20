@@ -177,15 +177,40 @@ video {
   height: auto;
 }
 
+/* COLORS */
+.blue {
+  color: blue;
+  font-weight: bold; 
+}
+.magenta {
+  color: magenta;
+  font-weight: bold; 
+}
+.yellow {
+  color: orange;
+  font-weight: bold; 
+}
+
+
+/* LIM  */
 .lim {
     font-family: 'Times New Roman', Times, serif;
     color: orange;
     font-weight: bold; 
 }
+.limblack {
+  font-family: 'Times New Roman', Times, serif;
+}
 
+/* LIM  XYZ */
 .limxyz {
   font-family: 'Times New Roman', Times, serif;
   color: purple; /* Set the text color to orange */
   font-weight: bold; /* Make the text bold */
+  text-decoration: overline; /* Add an overline to the text */
+}
+
+.limxyzblack {
+  font-family: 'Times New Roman', Times, serif;
   text-decoration: overline; /* Add an overline to the text */
 }

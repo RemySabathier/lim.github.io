@@ -68,7 +68,14 @@
     </p>
         </div>
           <img src="static/images/architecture.png" height="10%">
-          <figcaption>Figure1: <b><span class="lim">LIM</span> Architecture</b>. TODO</figcaption>
+          <figcaption>
+            Figure1: <b><span class="lim">LIM</span> Architecture</b>.
+            (Left) Given multi-view images on 2 timesteps \( k \) and \( k+1 \), LIM interpolates any intermediate 3D representation at \( k+\alpha, \alpha \in [0,1] \). 
+            It achieves this notably via cross-attention with the latest intermediate features of LRM on keyframe \( k \). 
+            In practice, our LIM architecture has 6 blocks and LRM 12 blocks. 
+            (Right) Block structure of LRM and LIM. 
+            We include layer normalization before each module in blocks.
+          </figcaption>
             <br>
           </div>
     </div>
@@ -84,8 +91,11 @@
       <h2 class="title is-3">Frame Interpolation</h2>
       <div class="content is-centered has-text-centered has-text-justified">
         <p>
-          Our first model, <span class="lim">LIM</span> directly interpolates color & opacity-field in 3D space.
-          It dramatically reduces artifact compared to image-based interpolation.
+          Our first model, <span class="lim">LIM</span> directly interpolates color & opacity-field in 3D space in the multi-view setting.
+          We observe that: 
+          <b>(i)</b> Linear interpolation in triplane space fails on dynamic parts 
+          <b>(ii)</b> Image-based interpolation (FILM) in the multi-view setting leads to defective reconstructions (with ghosting around dynamic parts)
+          <b>(iii)</b> <span class="lim">LIM</span> yields the most plausible results, without artifacts.
         </p>
       </div>
       <!-- Add the video here -->
@@ -95,7 +105,14 @@
           Your browser does not support the video tag.
         </video>
       </div>
-      <figcaption>Figure2: <b>Frame Interpolation</b>. TODO</figcaption>
+      <figcaption>
+        Figure2: <b>Frame Interpolation</b>. 
+        We add 2 interpolated frames between each frame rendered from multi-view LRM.
+        Oracle is the upper-bound limit, where we perform LRM reconstruction with multi-views images on all frames 
+        (including the ones interpolated by the 3 methods).        
+        For each method, we render the video with the LRM renders and the interpolated frames in-between. 
+        We highlight a single interpolation step at the end.
+      </figcaption>
       <!-- End video -->
     </div>
   </div>
@@ -107,12 +124,18 @@
 <section class="section">  
     <div class="container is-max-desktop">
       <div class="container is-centered has-text-centered">
-        <h2 class="title is-3">Mesh Tracking</h2>
+        <h2 class="title is-3">Frame Tracking</h2>
         <div class="content is-centered has-text-centered has-text-justified">
           <p>
-            An extension of our model, <span class="limxyz">LIM</span>, can propagate the <b>XYZ coordinates</b> on the first timestep to the other steps.
-            This is the cornerstone of the mesh tracking method, which will leverage these matches.
-          </p>
+            An extension of our model, <span class="limxyz">LIM</span>, can trace the deformable shape through time.
+            Given a multi-view sequence with RGB inputs, we start by extracting the triplane on the first frame with LRM.
+            We render the triplane to obtain a depth map that we unproject to get multi-view renders of 
+            <span class="blue">X</span><span class="magenta">Y</span><span class="yellow">Z</span>
+            coordinates on the first (=canonical) frame. 
+            Finally, from the XYZ renders on the first frame, and RGB inputs on all the frames, 
+            <span class="limxyzblack">LIM</span> propagates the XYZ canonical coordinates on the first timestep to the other steps.
+            We use these surface annotations to output a time-deforming mesh with fixed topology and texture.            
+          <p>
         </div>
       <!-- Add the video here -->
       <div class="video-container">
@@ -121,7 +144,10 @@
           Your browser does not support the video tag.
         </video>
       </div>
-      <figcaption>Figure3: <b>Tracking</b>. TODO</figcaption>
+      <figcaption>
+        Figure3: <b>XYZ coordinates tracking</b>.  
+        <span class="limxyz">LIM</span> interpolates the XYZ coordinates on the first (=canonical) frame to the next ones.
+      </figcaption>
       <!-- End video -->
       </div>
       </div>
@@ -137,9 +163,10 @@
       <h2 class="title is-3">Application: Monocular Reconstruction</h2>
       <div class="content is-centered has-text-centered has-text-justified">
         <p>
-          We observe that results from off-the-shelf 3D reconstructor jitters (since the frames are reconstructed independently).
-          Consistent4D are consistent in time, but the method is slow.
-          Our method combined with a monocular-to-multiview video diffusion model is significantly faster and time-consistent.
+          We show extension of our framework to the monocular reconstruction setting. 
+          We observe that results from <b>TripoSR</b> (image-to-3D reconstructor) jitters since the frames are reconstructed independently.
+          <b>Consistent4D</b> renders are consistent in time, but the method is slow.
+          Our method combined with a monocular-to-multiview video diffusion model is consistent in time and significantly faster.
         </p>
       </div>
       <!-- Add the video here -->
@@ -149,7 +176,7 @@
           Your browser does not support the video tag.
         </video>
       </div>
-      <figcaption>Figure3: <b>Monocular Reconstruction</b>. TODO</figcaption>
+      <figcaption>Figure3: <b>Monocular Reconstruction</b> </figcaption>
       <!-- End video -->
     </div>
   </div>
