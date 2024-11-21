@@ -1,3 +1,3 @@
-Project page of "LIM: Large Interpolator Model for Dynamic Reconstruction"
+The main webpage is "index.html".
 
-Remy Sabathier
+In case the videos are not correctly rendered in your web browser, they can be found in "static/images/".

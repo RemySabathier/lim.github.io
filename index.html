@@ -120,7 +120,7 @@
   <!-- Interpolation -->
 
 
-  <!-- Mesh Tracking -->
+  <!-- XYZ Interpolation -->
 <section class="section">  
     <div class="container is-max-desktop">
       <div class="container is-centered has-text-centered">
@@ -134,7 +134,6 @@
             coordinates on the first (=canonical) frame. 
             Finally, from the XYZ renders on the first frame, and RGB inputs on all the frames, 
             <span class="limxyzblack">LIM</span> propagates the XYZ canonical coordinates on the first timestep to the other steps.
-            We use these surface annotations to output a time-deforming mesh with fixed topology and texture.            
           <p>
         </div>
       <!-- Add the video here -->
@@ -153,7 +152,34 @@
       </div>
     </div>
   </section>
-  <!-- Mesh Tracking -->
+  <!-- XYZ Interpolation -->
+
+
+  <!-- Mesh deformation -->
+  <section class="section">  
+    <div class="container is-max-desktop">
+      <div class="container is-centered has-text-centered">
+        <div class="content is-centered has-text-centered has-text-justified">
+          <p>
+            We use these surface annotations to output a time-deforming mesh with fixed topology and texture.            
+          <p>
+        </div>
+      <!-- Add the video here -->
+      <div class="video-container">
+        <video autoplay loop muted class="is-centered">
+          <source src="static/images/mesh_renders.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <figcaption>
+        Figure4: <b>Mesh deformation</b>.  We leverage LRM, <span class="lim">LIM</span> and <span class="limxyz">LIM</span> to reconstruct a time-deforming mesh with fixed topology, in the multi-view setting.
+      </figcaption>
+      <!-- End video -->
+      </div>
+      </div>
+    </div>
+  </section>
+  <!-- Mesh deformation -->
 
 
 <!-- 4D Reconstruction -->
@@ -176,7 +202,7 @@
           Your browser does not support the video tag.
         </video>
       </div>
-      <figcaption>Figure3: <b>Monocular Reconstruction</b> </figcaption>
+      <figcaption>Figure5: <b>Monocular Reconstruction</b> </figcaption>
       <!-- End video -->
     </div>
   </div>
@@ -198,6 +224,11 @@
           Dmitry Tochilkin, David Pankratz, Zexiang Liu, Zixuan Huang, Adam Letts, Yangguang Li, Ding Liang, Christian Laforte, Varun Jampani, Yan-Pei Cao (2024). 
           <b>TripoSR</b>: Fast 3D Object Reconstruction from a Single Image. 
           <a href="https://arxiv.org/abs/2403.02151"> (link)</a>
+        </li>
+        <li>
+          Fitsum Reda, Janne Kontkanen, Eric Tabellion, Deqing Sun, Caroline Pantofaru, Brian Curless (2022). 
+          <b>FILM</b>: Frame Interpolation for Large Motion          
+          <a href="https://arxiv.org/abs/2202.04901"> (link)</a>
         </li>
       </ul>
     </div>
