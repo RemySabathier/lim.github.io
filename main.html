@@ -32,40 +32,91 @@
 </head>
 
 <body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+
+        <!-- <a class="navbar-item" href="TODO!!!">
+        <span class="icon">
+            <i class="fas fa-home"></i>
+        </span>
+        </a> -->
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://remysabathier.github.io/animalavatar.github.io/">
+              AnimalAvatar
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
+
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">LIM: Large Interpolator Model for Dynamic Reconstruction</h1>
-            <h2 class="title is-4 publication-title">Supplemental, Paper ID: 1064</h2>   
+              <h1 class="title is-1 publication-title">LIM: Large Interpolator Model for Dynamic Reconstruction</h1>
+              <h2 class="title is-4 publication-title">CVPR 2025</span></h2>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="https://profiles.ucl.ac.uk/96179-remy-sabathier">Remy Sabathier</a><sup>1,2</sup>,</span>
+                  <span class="author-block">
+                    <a href="http://www0.cs.ucl.ac.uk/staff/n.mitra/">Niloy J. Mitra</a><sup>1</sup>,</span>
+                <span class="author-block">
+                  <a href="https://d-novotny.github.io/">David Novotny</a><sup>2</sup>,</span>
+              </div>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block"><sup>1</sup>University College London,</span>
+                <span class="author-block"><sup>2</sup>Meta</span>
+              </div>
 
 
-            <div class="column has-text-centered">
+              <div class="column has-text-centered">
               <div class="publication-links">
-                <!-- Paper. -->
+
+                <!-- Arxiv Link. -->
                 <span class="link-block">
                   <a href="static/pdf/paper.pdf"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="far fa-check-circle"></i>
-                  </span>
-                  <span>Paper</span>
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
                   </a>
                 </span>
-                <!-- Supplemental. -->
+
+                <!-- Code Link. -->
                 <span class="link-block">
-                  <a href="static/pdf/supplemental.pdf"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="far fa-check-circle"></i>
-                  </span>
-                  <span>Supplemental</span>
-                  </a>
+                  <a href=""
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Soon)</span>
+                    </a>
                 </span>
+
+
               </div>
             </div>
-          
           </div>
           </div>
         </div>
@@ -90,17 +141,17 @@
         We also use LIM, in conjunction with a diffusion-based multiview generator, to produce dynamic 4D reconstructions from monocular videos.
         We evaluate LIM on various dynamic datasets, benchmarking against image-space interpolation methods (e.g., FiLM [3]) and direct triplane linear interpolation, and demonstrate clear advantages.
         In summary, LIM is the first feed-forward model capable of high-speed tracked 4D asset reconstruction across diverse categories.
-    
-    
+
+
     </p>
         </div>
           <img src="static/images/architecture.png" height="10%">
           <figcaption>
             Figure1: <b><span class="lim">LIM</span> Architecture</b>.
-            (Left) Given multi-view images on 2 timesteps \( k \) and \( k+1 \), LIM interpolates any intermediate 3D representation at \( k+\alpha, \alpha \in [0,1] \). 
-            It achieves this notably via cross-attention with the latest intermediate features of LRM on keyframe \( k \). 
-            In practice, our LIM architecture has 6 blocks and LRM 12 blocks. 
-            (Right) Block structure of LRM and LIM. 
+            (Left) Given multi-view images on 2 timesteps \( k \) and \( k+1 \), LIM interpolates any intermediate 3D representation at \( k+\alpha, \alpha \in [0,1] \).
+            It achieves this notably via cross-attention with the latest intermediate features of LRM on keyframe \( k \).
+            In practice, our LIM architecture has 6 blocks and LRM 12 blocks.
+            (Right) Block structure of LRM and LIM.
             We include layer normalization before each module in blocks.
           </figcaption>
             <br>
@@ -112,15 +163,15 @@
 
 
 <!-- Interpolation -->
-<section class="section">  
+<section class="section">
   <div class="container is-max-desktop">
     <div class="container is-centered has-text-centered">
       <h2 class="title is-3">Frame Interpolation</h2>
       <div class="content is-centered has-text-centered has-text-justified">
         <p>
           Our first model, <span class="lim">LIM</span> directly interpolates color & opacity-field in 3D space in the multi-view setting.
-          We observe that: 
-          <b>(i)</b> Linear interpolation in triplane space fails on dynamic parts 
+          We observe that:
+          <b>(i)</b> Linear interpolation in triplane space fails on dynamic parts
           <b>(ii)</b> Image-based interpolation (FILM [3]) in the multi-view setting leads to defective reconstructions (with ghosting around dynamic parts)
           <b>(iii)</b> <span class="lim">LIM</span> yields the most plausible results, without artifacts.
         </p>
@@ -133,11 +184,11 @@
         </video>
       </div>
       <figcaption>
-        Figure2: <b>Frame Interpolation</b>. 
+        Figure2: <b>Frame Interpolation</b>.
         We add 2 interpolated frames between each frame rendered from multi-view LRM.
-        Oracle is the upper-bound limit, where we perform LRM reconstruction with multi-views images on all frames 
-        (including the ones interpolated by the 3 methods).        
-        For each method, we render the video with the LRM renders and the interpolated frames in-between. 
+        Oracle is the upper-bound limit, where we perform LRM reconstruction with multi-views images on all frames
+        (including the ones interpolated by the 3 methods).
+        For each method, we render the video with the LRM renders and the interpolated frames in-between.
         We highlight a single interpolation step at the end.
       </figcaption>
       <!-- End video -->
@@ -148,7 +199,7 @@
 
 
   <!-- XYZ Interpolation -->
-<section class="section">  
+<section class="section">
     <div class="container is-max-desktop">
       <div class="container is-centered has-text-centered">
         <h2 class="title is-3">Frame Tracking</h2>
@@ -156,10 +207,10 @@
           <p>
             An extension of our model, <span class="limxyz">LIM</span>, can trace the deformable shape through time.
             Given a multi-view sequence with RGB inputs, we start by extracting the triplane on the first frame with LRM.
-            We render the triplane to obtain a depth map that we unproject to get multi-view renders of 
+            We render the triplane to obtain a depth map that we unproject to get multi-view renders of
             <span class="blue">X</span><span class="magenta">Y</span><span class="yellow">Z</span>
-            coordinates on the first (=canonical) frame. 
-            Finally, from the XYZ renders on the first frame, and RGB inputs on all the frames, 
+            coordinates on the first (=canonical) frame.
+            Finally, from the XYZ renders on the first frame, and RGB inputs on all the frames,
             <span class="limxyzblack">LIM</span> propagates the XYZ canonical coordinates on the first timestep to the other steps.
           <p>
         </div>
@@ -171,7 +222,7 @@
         </video>
       </div>
       <figcaption>
-        Figure3: <b>XYZ coordinates tracking</b>.  
+        Figure3: <b>XYZ coordinates tracking</b>.
         <span class="limxyz">LIM</span> interpolates the XYZ coordinates on the first (=canonical) frame to the next ones.
       </figcaption>
       <!-- End video -->
@@ -183,12 +234,12 @@
 
 
   <!-- Mesh deformation -->
-  <section class="section">  
+  <section class="section">
     <div class="container is-max-desktop">
       <div class="container is-centered has-text-centered">
         <div class="content is-centered has-text-centered has-text-justified">
           <p>
-            We use these surface annotations to output a time-deforming mesh with fixed topology and texture.            
+            We use these surface annotations to output a time-deforming mesh with fixed topology and texture.
           <p>
         </div>
       <!-- Add the video here -->
@@ -210,13 +261,13 @@
 
 
 <!-- 4D Reconstruction -->
-<section class="section">  
+<section class="section">
   <div class="container is-max-desktop">
     <div class="container is-centered has-text-centered">
       <h2 class="title is-3">Application: Monocular Reconstruction</h2>
       <div class="content is-centered has-text-centered has-text-justified">
         <p>
-          We show extension of our framework to the monocular reconstruction setting. 
+          We show extension of our framework to the monocular reconstruction setting.
           We observe that results from <b>TripoSR</b> [2] (image-to-3D reconstructor) jitters since the frames are reconstructed independently.
           <b>Consistent4D</b> [1] renders are consistent in time, but the method is slow.
           Our method combined with a monocular-to-multiview video diffusion model is consistent in time and significantly faster.
@@ -243,25 +294,25 @@
       <h2 class="title">Related Work</h2>
       <ul>
         <li>
-          <b>[1]</b> Yanqin Jiang, Li Zhang, Jin Gao, Weimin Hu, Yao Yao (2024). 
-          <b>Consistent4D</b>: Consistent 360deg Dynamic Object Generation from Monocular Video. 
+          <b>[1]</b> Yanqin Jiang, Li Zhang, Jin Gao, Weimin Hu, Yao Yao (2024).
+          <b>Consistent4D</b>: Consistent 360deg Dynamic Object Generation from Monocular Video.
           <a href="https://arxiv.org/abs/2311.02848"> (link)</a>
         </li>
         <li>
-          <b>[2]</b> Dmitry Tochilkin, David Pankratz, Zexiang Liu, Zixuan Huang, Adam Letts, Yangguang Li, Ding Liang, Christian Laforte, Varun Jampani, Yan-Pei Cao (2024). 
-          <b>TripoSR</b>: Fast 3D Object Reconstruction from a Single Image. 
+          <b>[2]</b> Dmitry Tochilkin, David Pankratz, Zexiang Liu, Zixuan Huang, Adam Letts, Yangguang Li, Ding Liang, Christian Laforte, Varun Jampani, Yan-Pei Cao (2024).
+          <b>TripoSR</b>: Fast 3D Object Reconstruction from a Single Image.
           <a href="https://arxiv.org/abs/2403.02151"> (link)</a>
         </li>
         <li>
-          <b>[3]</b> Fitsum Reda, Janne Kontkanen, Eric Tabellion, Deqing Sun, Caroline Pantofaru, Brian Curless (2022). 
-          <b>FILM</b>: Frame Interpolation for Large Motion          
+          <b>[3]</b> Fitsum Reda, Janne Kontkanen, Eric Tabellion, Deqing Sun, Caroline Pantofaru, Brian Curless (2022).
+          <b>FILM</b>: Frame Interpolation for Large Motion
           <a href="https://arxiv.org/abs/2202.04901"> (link)</a>
         </li>
       </ul>
     </div>
   </section>
   <!-- Related work -->
-  
+
   <footer>
     Template inspired by <a href="https://github.com/nerfies/nerfies.github.io">Nerfies.</a>
   </footer>
