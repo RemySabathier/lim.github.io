@@ -94,12 +94,12 @@
 
                 <!-- Arxiv Link. -->
                 <span class="link-block">
-                  <a href="static/pdf/paper.pdf"
+                  <a href=""
                      class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                         <i class="ai ai-arxiv"></i>
                     </span>
-                    <span>arXiv</span>
+                    <span>arXiv (Soon)</span>
                   </a>
                 </span>
 
@@ -141,22 +141,74 @@
         We also use LIM, in conjunction with a diffusion-based multiview generator, to produce dynamic 4D reconstructions from monocular videos.
         We evaluate LIM on various dynamic datasets, benchmarking against image-space interpolation methods (e.g., FiLM [3]) and direct triplane linear interpolation, and demonstrate clear advantages.
         In summary, LIM is the first feed-forward model capable of high-speed tracked 4D asset reconstruction across diverse categories.
+      </p>
 
-
-    </p>
+      <div style="text-align: center; margin-top: 20px;">
+        <div class="button-container">
+            <button class="choice-button" id="buttonRGB" onclick="changeContent('RGB')">\(\text{LIM}\)</button>
+            <button class="choice-button" id="buttonXYZ" onclick="changeContent('XYZ')">\(\overline{\text{LIM}}\)</button>
         </div>
-          <img src="static/images/architecture.png" height="10%">
-          <figcaption>
-            Figure1: <b><span class="lim">LIM</span> Architecture</b>.
-            (Left) Given multi-view images on 2 timesteps \( k \) and \( k+1 \), LIM interpolates any intermediate 3D representation at \( k+\alpha, \alpha \in [0,1] \).
-            It achieves this notably via cross-attention with the latest intermediate features of LRM on keyframe \( k \).
-            In practice, our LIM architecture has 6 blocks and LRM 12 blocks.
-            (Right) Block structure of LRM and LIM.
-            We include layer normalization before each module in blocks.
-          </figcaption>
-            <br>
-          </div>
+        <img id="image" src="" height="10%">
+        <figcaption id="caption">
+          Select a version of LIM.
+        </figcaption>
     </div>
+    <style>
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .choice-button {
+            font-size: 18px;
+            padding: 5px 10px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .active {
+            border-color: blue; /* Change this color to your preferred active color */
+            background-color: lightblue; /* Optional: add a background color for the active button */
+        }
+    </style>
+    <script>
+        function changeContent(choice) {
+            const image = document.getElementById('image');
+            const caption = document.getElementById('caption');
+            const buttonRGB = document.getElementById('buttonRGB');
+            const buttonXYZ = document.getElementById('buttonXYZ');
+            if (choice === 'RGB') {
+                image.src = 'static/images/lim_rgb_architecture.png'; // Update with the correct path for the RGB image
+                caption.innerHTML = `
+                  Figure1: <b><span class="lim">LIM</span> Architecture</b>.
+                  (Left) Given multi-view images on 2 timesteps \\( k \\) and \\( k+1 \\), <span class="limblack">LIM</span> interpolates any intermediate 3D representation at \\( k+\\alpha, \\alpha \\in [0,1] \\).
+                  It achieves this notably via cross-attention with the latest intermediate features of <span class="limblack">LRM</span> on keyframe \\( k \\).
+                  In practice, our <span class="limblack">LIM</span> architecture has 6 blocks and <span class="limblack">LRM</span> 12 blocks.
+                  (Right) Block structure of <span class="limblack">LRM</span> and <span class="limblack">LIM</span>.
+                  We include layer normalization before each module in blocks.
+                `;
+                buttonRGB.classList.add('active');
+                buttonXYZ.classList.remove('active');
+            } else if (choice === 'XYZ') {
+                image.src = 'static/images/lim_xyz_architecture.png'; // Update with the correct path for the XYZ image
+                caption.innerHTML = `
+                  Figure1 bis: <b><span class="limxyz">LIM</span> Architecture</b>.
+                  (Left) Given multi-view RGB images on 2 timesteps \\( k \\) and \\( k+1 \\) and XYZ canonical-coordinate renders on timestep \\( k \\), <span class="limxyzblack">LIM</span> interpolates any intermediate 3D representation of the XYZ canonical-coordinates at \\( k+\\alpha, \\alpha \\in [0,1] \\).
+                  It achieves this notably via cross-attention with the latest intermediate features of <span class="limxyzblack">LRM</span> on keyframe \\( k \\).
+                  This gives direct correspondences in 3D space between the source shape at \\( k \\)  and the interpolated shape at \\( k+\\alpha \\).
+                  In practice, our <span class="limxyzblack">LIM</span> architecture has 6 blocks and <span class="limxyzblack">LIM</span> 12 blocks.
+                  (Right) Block structure of <span class="limxyzblack">LRM</span> and <span class="limxyzblack">LIM</span>.
+                  We include layer normalization before each module in blocks.
+                `;
+                buttonXYZ.classList.add('active');
+                buttonRGB.classList.remove('active');
+            }
+          // Render the LaTeX
+          MathJax.typeset();
+        }
+        // Initialize the default active button
+        document.getElementById('buttonRGB').classList.add('active');
+    </script>
   </div>
 </section>
 <!--/ Abstract. -->
@@ -202,7 +254,7 @@
 <section class="section">
     <div class="container is-max-desktop">
       <div class="container is-centered has-text-centered">
-        <h2 class="title is-3">Frame Tracking</h2>
+        <h2 class="title is-3">4D Reconstruction</h2>
         <div class="content is-centered has-text-centered has-text-justified">
           <p>
             An extension of our model, <span class="limxyz">LIM</span>, can trace the deformable shape through time.
@@ -214,20 +266,14 @@
             <span class="limxyzblack">LIM</span> propagates the XYZ canonical coordinates on the first timestep to the other steps.
           <p>
         </div>
-      <!-- Add the video here -->
-      <div class="video-container">
-        <video autoplay loop muted class="is-centered">
-          <source src="static/images/qualitative_xyz.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
+
+      <img id="image" src="static/images/4dtrack_pipeline.png" width="80%">
       <figcaption>
         Figure3: <b>XYZ coordinates tracking</b>.
         <span class="limxyz">LIM</span> interpolates the XYZ coordinates on the first (=canonical) frame to the next ones.
       </figcaption>
-      <!-- End video -->
-      </div>
-      </div>
+
+    </div>
     </div>
   </section>
   <!-- XYZ Interpolation -->
