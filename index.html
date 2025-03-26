@@ -192,11 +192,8 @@
                 image.src = 'static/images/lim_rgb_architecture.png'; // Update with the correct path for the RGB image
                 caption.innerHTML = `
                   Figure1: <b><span class="lim">LIM</span> Architecture</b>.
-                  (Left) Given multi-view images on 2 timesteps \\( k \\) and \\( k+1 \\), <span class="limblack">LIM</span> interpolates any intermediate 3D representation at \\( k+\\alpha, \\alpha \\in [0,1] \\).
+                  Given multi-view images on 2 timesteps \\( k \\) and \\( k+1 \\), <span class="limblack">LIM</span> interpolates any intermediate 3D representation at \\( k+\\alpha, \\alpha \\in [0,1] \\).
                   It achieves this notably via cross-attention with the latest intermediate features of <span class="limblack">LRM</span> on keyframe \\( k \\).
-                  In practice, our <span class="limblack">LIM</span> architecture has 6 blocks and <span class="limblack">LRM</span> 12 blocks.
-                  (Right) Block structure of <span class="limblack">LRM</span> and <span class="limblack">LIM</span>.
-                  We include layer normalization before each module in blocks.
                 `;
                 buttonRGB.classList.add('active');
                 buttonXYZ.classList.remove('active');
@@ -204,12 +201,8 @@
                 image.src = 'static/images/lim_xyz_architecture.png'; // Update with the correct path for the XYZ image
                 caption.innerHTML = `
                   Figure1 bis: <b><span class="limxyz">LIM</span> Architecture</b>.
-                  (Left) Given multi-view RGB images on 2 timesteps \\( k \\) and \\( k+1 \\) and XYZ canonical-coordinate renders on timestep \\( k \\), <span class="limxyzblack">LIM</span> interpolates any intermediate 3D representation of the XYZ canonical-coordinates at \\( k+\\alpha, \\alpha \\in [0,1] \\).
-                  It achieves this notably via cross-attention with the latest intermediate features of <span class="limxyzblack">LRM</span> on keyframe \\( k \\).
-                  This gives direct correspondences in 3D space between the source shape at \\( k \\)  and the interpolated shape at \\( k+\\alpha \\).
-                  In practice, our <span class="limxyzblack">LIM</span> architecture has 6 blocks and <span class="limxyzblack">LIM</span> 12 blocks.
-                  (Right) Block structure of <span class="limxyzblack">LRM</span> and <span class="limxyzblack">LIM</span>.
-                  We include layer normalization before each module in blocks.
+                  Given multi-view RGB images on 2 timesteps \\( k \\) and \\( k+1 \\) <b>and</b> XYZ canonical-coordinate renders on timestep \\( k \\), <span class="limxyzblack">LIM</span> interpolates any intermediate 3D representation of the XYZ canonical-coordinates at \\( k+\\alpha, \\alpha \\in [0,1] \\).
+                  This gives <b>direct correspondences</b> in 3D space between the source shape at \\( k \\)  and the interpolated shape at \\( k+\\alpha \\).
                 `;
                 buttonXYZ.classList.add('active');
                 buttonRGB.classList.remove('active');
@@ -234,8 +227,8 @@
         <p>
           Our first model, <span class="lim">LIM</span> directly interpolates color & opacity-field in 3D space in the multi-view setting.
           We observe that:
-          <b>(i)</b> Linear interpolation in triplane space fails on dynamic parts
-          <b>(ii)</b> Image-based interpolation (FILM [3]) in the multi-view setting leads to defective reconstructions (with ghosting around dynamic parts)
+          <b>(i)</b> <b>Linear</b> interpolation in triplane space fails on dynamic parts
+          <b>(ii)</b> Image-based interpolation (<b>FILM</b> [3]) in the multi-view setting leads to defective reconstructions (with ghosting around dynamic parts)
           <b>(iii)</b> <span class="lim">LIM</span> yields the most plausible results, without artifacts.
         </p>
       </div>
@@ -283,22 +276,9 @@
         Figure3: <b>XYZ coordinates tracking</b>.
         <span class="limxyz">LIM</span> interpolates the XYZ coordinates on the first (=canonical) frame to the next ones.
       </figcaption>
-
-    </div>
-    </div>
-  </section>
-  <!-- XYZ Interpolation -->
-
-
-  <!-- Mesh deformation -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="container is-centered has-text-centered">
-        <div class="content is-centered has-text-centered has-text-justified">
-          <p>
-            We use these surface annotations to output a time-deforming mesh with fixed topology and texture.
-          <p>
-        </div>
+      <p style="margin-top: 20px;">
+        We use these surface annotations to reconstruct a time-deforming mesh with fixed topology and texture.
+      <p>
       <!-- Add the video here -->
       <div class="video-container">
         <video autoplay loop muted class="is-centered">
@@ -307,14 +287,13 @@
         </video>
       </div>
       <figcaption>
-        Figure4: <b>Mesh deformation</b>.  We leverage LRM, <span class="lim">LIM</span> and <span class="limxyz">LIM</span> to reconstruct a time-deforming mesh with fixed topology, in the multi-view setting.
+        Figure4: <b>Mesh deformation</b>.  We reconstruct a time-deforming mesh with fixed topology, in the multi-view setting.
       </figcaption>
       <!-- End video -->
-      </div>
-      </div>
+    </div>
     </div>
   </section>
-  <!-- Mesh deformation -->
+  <!-- XYZ Interpolation -->
 
 
 <!-- 4D Reconstruction -->
@@ -324,10 +303,10 @@
       <h2 class="title is-3">Application: Monocular Reconstruction</h2>
       <div class="content is-centered has-text-centered has-text-justified">
         <p>
-          We show extension of our framework to the monocular reconstruction setting.
+          Our method, combined with a monocular-to-multiview video diffusion model, can be extended to the monocular reconstruction setting.
           We observe that results from <b>TripoSR</b> [2] (image-to-3D reconstructor) jitters since the frames are reconstructed independently.
           <b>Consistent4D</b> [1] renders are consistent in time, but the method is slow.
-          Our method combined with a monocular-to-multiview video diffusion model is consistent in time and significantly faster.
+          Our method is consistent in time, has a single topology, and is significantly faster.
         </p>
       </div>
       <!-- Add the video here -->
@@ -373,7 +352,6 @@
   <footer>
     Template inspired by <a href="https://github.com/nerfies/nerfies.github.io">Nerfies.</a>
   </footer>
-
 
 </body>
 </html>
