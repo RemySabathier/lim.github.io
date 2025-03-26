@@ -214,3 +214,10 @@ video {
   font-family: 'Times New Roman', Times, serif;
   text-decoration: overline; /* Add an overline to the text */
 }
+
+.paragraph-container {
+  background-color: #eae8e8; /* Light gray background */
+  padding: 15px;            /* Padding inside the rectangle */
+  border-radius: 5px;       /* Rounded corners */
+  margin-top: 20px;         /* Space above the rectangle */
+}
